@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>짝수/홀수 판별 프로그램</title>
+</head>
+<body>
+    <h3>짝수/홀수를 판별하는 프로그램</h3>
+	<%
+		int num = 11;
+		String result = "";
+		
+		if(num % 2 == 0){
+			result = "짝수입니다.";
+		}else{
+			result = "홀수입니다.";
+		}
+		
+		out.println("결과는 " + result);
+	%>
+	
+	<p>결과는 <%= result %></p>
+</body>
+</html>
