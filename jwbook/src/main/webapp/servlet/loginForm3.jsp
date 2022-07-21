@@ -7,7 +7,7 @@
 <title>로그인 폼</title>
 </head>
 <body>
-	<form action="login3" method="get">
+	<form action="/jwbook/login3" method="get">
 		<p>
 			<label for="userid">아이디: </label>
 			<input type="text" id="userid" name="userid">
