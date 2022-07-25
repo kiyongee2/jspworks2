@@ -11,7 +11,7 @@
 	<div id="container">
 		<h2>주소록 등록</h2>
 		<hr>
-		<form action="addrAdd.jsp" method="post">
+		<form action="./addrAdd.jsp" method="post">
 			<table id="tbl">
 				<tr>
 					<td>이름</td>

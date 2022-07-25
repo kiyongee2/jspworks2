@@ -14,7 +14,17 @@
 <jsp:setProperty property="email" name="addrBook"/>
 <jsp:setProperty property="gender" name="addrBook"/>
 <jsp:useBean id="abDAO" class="com.dao.AddrBookDAO" scope="application"/>
-<% abDAO.add(addrBook);  //dao의 add() 메서드 호출 %>
+<% 
+	//세션 발급
+	String username = request.getParameter("username");
+	session.setAttribute("userName", username);
+
+	if(session.getAttribute("userName") != null){
+		abDAO.add(addrBook);  //dao의 add() 메서드 호출
+	}else{
+		response.sendRedirect("./addrForm.jsp");
+	}
+%>
 <body>
 	<div id="container">
 		<h2>등록 내용</h2>
@@ -24,7 +34,7 @@
 		<p>이메일: <%=addrBook.getEmail() %>
 		<p>성별: <%=addrBook.getGender() %>
 		<hr>
-		<a href="addrList.jsp">목록 보기</a>
+		<a href="./addrList.jsp">목록 보기</a>
 	</div>
 </body>
 </html>

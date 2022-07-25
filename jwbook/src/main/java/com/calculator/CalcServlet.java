@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CalcServlet extends HttpServlet {
 	private static final long serialVersionUID = 123L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//폼 데이터 넘겨 받기
 		int n1 = Integer.parseInt(request.getParameter("n1"));
 		int n2 = Integer.parseInt(request.getParameter("n2"));
@@ -41,8 +41,8 @@ public class CalcServlet extends HttpServlet {
 		   .append("계산 결과: " + result)
 		   .append("</body></html>");
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 }
