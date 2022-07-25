@@ -13,7 +13,7 @@
 	boolean result = abDAO.checkLogin(email);
 	
 	if(result){
-		session.setAttribute("sessionId", email);
+		session.setAttribute("sessionId", email);   //세션 발급(이름 - sessionId)
 	}else{
 		out.println("<script>");
 		out.println("alert('이메일이 일치하지 않습니다.')");
