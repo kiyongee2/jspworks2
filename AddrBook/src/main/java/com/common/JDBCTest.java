@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JDBCTest {
-	
 	private static String driverClass = "oracle.jdbc.OracleDriver";      //오라클 드라이버
 	private static String url = "jdbc:oracle:thin:@localhost:1521:xe";   //db 경로 포트-1521
 	private static String username = "c##jweb";                           //사용자 이름

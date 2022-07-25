@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 public class JDBCUtil {
 	private static String driverClass = "oracle.jdbc.OracleDriver";
 	private static String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static String username = "system";
-	private static String password = "12345";
+	private static String username = "c##jweb";
+	private static String password = "54321";
 	
     //DB 연결 메서드
 	public static Connection getConnention() {
@@ -54,7 +54,6 @@ public class JDBCUtil {
 				e.printStackTrace();
 			}
 		}
-		
 		if(pstmt != null) {
 			try {
 				pstmt.close();
@@ -64,7 +63,6 @@ public class JDBCUtil {
 				pstmt = null;
 			}
 		}
-		
 		if(conn != null) {
 			try {
 				conn.close();
