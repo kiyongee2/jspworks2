@@ -20,16 +20,50 @@
 				AddrBook addrBook = abDAO.getOne(num); //dao에서 메소드 호출
 		%>
 			<tr>
-				<td>이름</td><td><%=addrBook.getUsername() %>
+				<td>번호</td>
+				<td><input type="text" name="num" value=<%=addrBook.getNum() %> readOnly></td>
 			</tr>
 			<tr>
-				<td>전화번호</td><td><%=addrBook.getTel() %>
+				<td>이름</td>
+				<td><input type="text" name="username" value=<%=addrBook.getUsername() %> readOnly></td>
 			</tr>
 			<tr>
-				<td>이메일</td><td><%=addrBook.getEmail() %>
+				<td>전화번호</td>
+				<td><input type="text" name="tel" value=<%=addrBook.getTel() %> readOnly></td>
 			</tr>
 			<tr>
-				<td>성별</td><td><%=addrBook.getGender() %>
+				<td>이메일</td>
+				<td><input type="text" name="email" value=<%=addrBook.getEmail() %> readOnly></td>
+			</tr>
+			<tr>
+				<td>성별</td>
+				<td>
+				<% if(addrBook.getGender().equals("남")){ %>
+					<input type="radio" name="gender" value="남" checked>남
+					<input type="radio" name="gender" value="여">여
+				<% }else{ %>
+					<input type="radio" name="gender" value="남">남
+					<input type="radio" name="gender" value="여" checked>여
+				<% } %>
+				</td>
+			</tr>
+			<tr>
+				<td>가입일</td>
+				<td><input type="text" name="joinDate" value=<%=addrBook.getJoinDate() %> readOnly></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<% if(session.getAttribute("sessionId").equals(addrBook.getEmail())){ %>
+					<a href="./addrUpdate.jsp?num=<%=addrBook.getNum() %>">
+						<button type="button">수정</button>
+					</a>
+					<a href="./addrDelete.jsp?num=<%=addrBook.getNum() %>" 
+					   onclick="return confirm('정말로 삭제하시겠습니까?')">
+						<button type="button">삭제</button>
+					</a>
+				<% } %>
+				<a href="./addrList.jsp"><button type="button">목록</button></a>
+				</td>
 			</tr>
 		<%
 			}else{

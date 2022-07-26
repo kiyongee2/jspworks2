@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /* 전체 스타일 */
 #container{width: 80%; margin: 0 auto; text-align: center; margin-top: 50px;}
+a{text-decoration: none;}
 
 /* 주소 등록 스타일*/
 #tbl{width: 400px; margin: 0 auto;}
@@ -24,6 +25,7 @@
 #tbl_view{width: 400px; margin: 0 auto;}
 #tbl_view, td{border: 1px solid #ccc; border-collapse: collapse;}
 #tbl_view td{height: 40px;}
+
 
 
 
