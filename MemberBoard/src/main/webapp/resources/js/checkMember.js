@@ -1,0 +1,6 @@
+/**
+ * 
+ */
+function checkMember(){
+	alert("testing...");
+}
