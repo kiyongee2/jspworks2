@@ -17,7 +17,7 @@ public class FirstServlet extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		RequestDispatcher dispatch = 
-				request.getRequestDispatcher("second?name=kim");
+				request.getRequestDispatcher("second?name=choi");
 		dispatch.forward(request, response);
 	}
 
