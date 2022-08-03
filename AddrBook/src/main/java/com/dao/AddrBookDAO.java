@@ -80,7 +80,7 @@ public class AddrBookDAO {
 		return false;
 	}
 	
-	//상세 보기
+	//주소 상세 보기
 	public AddrBook getOne(int num) {
 		AddrBook addrBook = new AddrBook();
 		try {

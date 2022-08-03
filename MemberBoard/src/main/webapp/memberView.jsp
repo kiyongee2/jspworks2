@@ -7,24 +7,8 @@
 <meta charset="UTF-8">
 <title>나의 정보</title>
 <link rel="stylesheet" href="./resources/css/common.css">
-<!-- <script src="./resources/js/checkMember.css"></script> -->
-<!-- <script type="text/javascript">
-	function checkMember(){
-		alert("testing");
-	}
-</script> -->
 </head>
 <jsp:useBean id="memberDAO" class="com.repository.MemberDAO"  scope="application" />
-<%
-	String memberId = null;
-	if(session.getAttribute("sessionId") != null){
-		memberId = (String)session.getAttribute("sessionId");
-	}else{
-		response.sendRedirect("./loginMember.jsp");
-	}
-	
-	Member member = memberDAO.getMember(memberId);
-%>
 <body>
 	<jsp:include page="./menu.jsp" />
 	<div id="container">
@@ -34,6 +18,12 @@
 		<div>
 			<form action="./updateProcess.jsp" method="post">
 			<table class="tbl">
+			<%
+				String memberId = null;
+				if(session.getAttribute("sessionId") != null){
+					memberId = (String)session.getAttribute("sessionId");
+					Member member = memberDAO.getMember(memberId);
+			%>
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" name="memberId" value="<%=member.getMemberId() %>" 
@@ -74,6 +64,11 @@
 						<input type="reset" value="취소">
 					</td>
 				</tr>
+				<% 
+				}else{
+					response.sendRedirect("./loginMember.jsp");
+				}
+				%>
 			</table>
 		</form>
 		</div>

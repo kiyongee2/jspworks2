@@ -25,11 +25,6 @@
   	</auth-constraint>
   </security-constraint>
   
-  <!-- 기본 인증 방법 -->
-  <!-- <login-config>
-  	<auth-method>BASIC</auth-method>
-  </login-config> -->
-  
   <!-- 폼 기반 인증 -->
   <login-config>
   	<auth-method>FORM</auth-method>

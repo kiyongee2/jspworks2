@@ -18,6 +18,6 @@
 	
 	memberDAO.addMember(member);
 	
-	response.sendRedirect("./memberList.jsp");
+	response.sendRedirect("./main.jsp");
 
 %>
