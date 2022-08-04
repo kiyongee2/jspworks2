@@ -30,7 +30,7 @@
 				%>
 				<tr>
 					<td><%=board.getBnum() %> </td>
-					<td><%=board.getTitle() %> </td>
+					<td><a href="./boardView.jsp?bnum=<%=board.getBnum() %>"><%=board.getTitle() %></a></td>
 					<td><%=board.getMemberId() %> </td>
 					<td><%=board.getRegDate() %> </td>
 				</tr>

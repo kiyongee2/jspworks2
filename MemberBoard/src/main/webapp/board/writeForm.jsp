@@ -6,17 +6,11 @@
 <meta charset="UTF-8">
 <title>글쓰기</title>
 <link rel="stylesheet" href="../resources/css/common.css">
-<!-- <script src="./resources/js/checkMember.css"></script> -->
-<!-- <script type="text/javascript">
-	function checkMember(){
-		alert("testing");
-	}
-</script> -->
 </head>
 <%
 	if(session.getAttribute("sessionId") == null){
 		out.println("<script>");
-		out.println("alert('로그인이 필요합니다.')");
+		out.println("alert('로그인 해주세요')");
 		out.println("location.href='../loginMember.jsp'");
 		out.println("</script>");
 	}
@@ -42,7 +36,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="글쓰기" onclick="checkBoard()">
+						<input type="submit" value="글쓰기" >
 						<input type="reset" value="취소">
 					</td>
 				</tr>

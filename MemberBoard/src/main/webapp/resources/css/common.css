@@ -21,10 +21,21 @@ footer{ margin-left: 20%; margin-top: 5%}
 /* table */
 .tbl{width: 450px; margin: 0 auto;}
 .tbl, td{border: 1px solid #ccc; border-collapse: collapse; padding: 10px;} 
-.tbl_list, .tbl_write{width: 700px; margin: 0 auto;} 
+.tbl_list, .tbl_write, .tbl_bo_view{width: 700px; margin: 0 auto;} 
 .tbl_list, th, td{border: 1px solid #ccc; border-collapse: collapse; padding: 10px;}
 .tbl_list thead{background: #eee;} 
 .tbl_write .w_title{width: 650px; height: 25px;}
 .tbl_write textarea{width: 650px;}
 .writeBtn{height: 40px; text-align: right; margin-right: 28%;}
 .writeBtn button{margin-top: 20px; width: 80px; height: 35px;}
+.tbl_bo_view, th, td{border: 1px solid #ccc; border-collapse: collapse; padding: 10px;}
+.tbl_bo_view td:nth-child(1){width:100px; background: #eee}
+.tbl_bo_view input{width: 550px;}
+.tbl_bo_view input[type="submit"], input[type="button"]{width:60px; height:30px; margin: 0 3px;}
+
+
+
+
+
+
+
