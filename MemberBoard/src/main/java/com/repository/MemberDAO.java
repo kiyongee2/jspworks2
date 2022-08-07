@@ -59,13 +59,13 @@ public class MemberDAO {
 	}
 	
 	//로그인 체크
-	public Boolean checkLogin(String memberId, String password) {
+	public Boolean checkLogin(Member member) {
 		conn = JDBCUtil.getConnention();
 		String sql = "SELECT * FROM t_member WHERE memberid=? and passwd=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memberId);
-			pstmt.setString(2, password);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPasswd());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return true;
@@ -77,7 +77,33 @@ public class MemberDAO {
 		}
 		return false;
 	}
-	
+		
+	//로그인
+	/*public Member login(Member member) {
+		Member loginMember = null;
+		try {
+			conn = JDBCUtil.getConnention();
+			String sql = "SELECT * FROM t_member WHERE memberid=? and passwd=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPasswd());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				loginMember = new Member();
+				loginMember.setMemberId(rs.getString("memberId"));
+				loginMember.setPasswd(rs.getString("passwd"));
+				loginMember.setName(rs.getString("name"));
+				loginMember.setGender(rs.getString("gender"));
+				loginMember.setJoinDate(rs.getDate("joindate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return loginMember;
+	}*/
+		
 	//회원 상세 보기
 	public Member getMember(String memberId) {
 		Member member = new Member();

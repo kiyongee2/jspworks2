@@ -1,27 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>글쓰기</title>
 <link rel="stylesheet" href="../resources/css/common.css">
-<!-- <script src="./resources/js/checkMember.css"></script> -->
-<!-- <script type="text/javascript">
-	function checkMember(){
-		alert("testing");
-	}
-</script> -->
 </head>
-<%
-	if(session.getAttribute("sessionId") == null){
-		out.println("<script>");
-		out.println("alert('로그인이 필요합니다.')");
-		out.println("location.href='../loginMember.jsp'");
-		out.println("</script>");
-	}
-%>
 <body>
+	<c:if test="${empty sessionId }">
+		<script type="text/javascript">
+			alert("로그인을 해주세요");
+			location.href="../loginMember.jsp";
+		</script>
+	</c:if>
 	<jsp:include page="../menu.jsp" />
 	<div id="container">
 		<div class="title">
@@ -42,7 +35,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="글쓰기" onclick="checkBoard()">
+						<input type="submit" value="글쓰기" >
 						<input type="reset" value="취소">
 					</td>
 				</tr>

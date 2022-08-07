@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="boardDAO" class="com.repository.BoardDAO"  scope="application" />
 <%
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("utf-8");  //한글 인코딩 처리
 
 	//세션 처리
 	String sessionId = null;
