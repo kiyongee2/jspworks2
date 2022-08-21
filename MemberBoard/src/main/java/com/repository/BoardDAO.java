@@ -80,13 +80,12 @@ public class BoardDAO {
 	//페이징 처리
 	public ArrayList<Board> getListAll(int startRow, int pageSize){
 		ArrayList<Board> boardList = new ArrayList<>();
-		
 		try {
 			conn = JDBCUtil.getConnention();
 			String sql = "SELECT * FROM t_board ORDER BY bnum DESC limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRow-1);
-			pstmt.setInt(2, pageSize);
+			pstmt.setInt(1, startRow-1);  //시작 행
+			pstmt.setInt(2, pageSize);    //페이지 당 게시글 수
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Board board = new Board();
