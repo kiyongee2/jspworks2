@@ -35,15 +35,16 @@
 		%>
 		<div>
 			<form action="./updateBoard.jsp" method="post">
+			<input type="hidden" name="bnum" value="<%=board.getBnum() %>">
 			<table class="tbl_bo_view">
-				<input type="hidden" name="bnum" value="<%=board.getBnum() %>">
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="title" value="<%=board.getTitle() %>"></td>
+					<td><input type="text" name="title" value="<%=board.getTitle() %>" class="view_text"></td>
 				</tr>
 				<tr>
 					<td>글쓴이</td>
-					<td><input type="text" name="memberId" value="<%=board.getMemberId() %>" readonly="readonly"></td>
+					<td><input type="text" name="memberId" value="<%=board.getMemberId() %>" 
+					           readonly="readonly" class="view_text"></td>
 				</tr>
 				<tr>
 					<td>내용</td>

@@ -1,4 +1,4 @@
-package com.repository;
+package com.repository2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.common.JDBCUtil;
+import com.repository.Board;
 
 public class BoardDAO {
 	//JDBC 관련 변수
@@ -17,8 +18,8 @@ public class BoardDAO {
 	//새글 추가
 	public void insertBoard(Board board) {
 		conn = JDBCUtil.getConnention();
-		String sql = "INSERT INTO t_board(title, content, memberId)"
-				+ " VALUES (?, ?, ?)";
+		String sql = "INSERT INTO t_board(bnum, title, content, memberId)"
+				+ " VALUES (b_seq.nextval, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, board.getTitle());
@@ -58,11 +59,12 @@ public class BoardDAO {
 		return boardList;
 	}*/
 	
-	//게시글 총 개수
+	//게시글 수
 	public int getBoardCount() {
 		int total = 0;
 		try {
 			conn= JDBCUtil.getConnention();
+			
 			String sql = "SELECT COUNT(*) total From t_board";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();

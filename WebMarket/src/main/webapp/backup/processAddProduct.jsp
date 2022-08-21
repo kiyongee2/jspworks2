@@ -9,7 +9,6 @@
 <%
 	request.setCharacterEncoding("utf-8");  //한글 인코딩 요청
 
-
 	//폼 입력값 받아 오기
 	String productId = request.getParameter("productId");
 	String pname = request.getParameter("pname");

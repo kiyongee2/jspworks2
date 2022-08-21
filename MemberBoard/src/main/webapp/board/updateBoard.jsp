@@ -20,7 +20,7 @@
 	if(session.getAttribute("sessionId") != null){
 		boardDAO.updateBoard(board);
 		out.println("<script>");
-		out.println("alert('나의 정보를 수정했습니다.')");
+		out.println("alert('게시글을 수정했습니다.')");
 		out.println("location.href='./boardList.jsp'");
 		out.println("</script>");
 	}else{
