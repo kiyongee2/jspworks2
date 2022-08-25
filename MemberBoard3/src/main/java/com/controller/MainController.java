@@ -86,20 +86,22 @@ public class MainController extends HttpServlet {
 			String memberId = request.getParameter("memberId");
 			String passwd = request.getParameter("passwd");
 			
-			int loginResult = memberDAO.checkLogin(memberId, passwd);
+			Member member = new Member();
+			member.setMemberId(memberId);
+			member.setPasswd(passwd);
+			
+			boolean loginResult = memberDAO.checkLogin(member);
 			String name = memberDAO.getNameByLogin(memberId);
 			
-			if(loginResult==1) {
+			if(loginResult) {
 				session.setAttribute("sessionId", memberId);  //id 세션 발급
 				session.setAttribute("name", name);  //name 세션 발급
 				request.setAttribute("msg", "login");
 				nextPage = "/memberResult.jsp";
-			}else if(loginResult==0) {
-				out.println("<script>alert('아이디가 일치하지 않습니다.');history.go(-1);</script>");
-			}else if(loginResult==-1) {
-				out.println("<script>alert('비밀번호가 일치하지 않습니다.');history.go(-1);</script>");
 			}else{
-				out.println("<script>alert('데이터베이스 오류입니다.');history.go(-1);</script>");
+				int error = 1;
+				request.setAttribute("error", error);
+				nextPage = "/loginMember.jsp";
 			}
 		}else if(command.equals("/logout.do")) {
 			//로그 아웃 처리 요청

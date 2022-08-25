@@ -59,29 +59,23 @@ public class MemberDAO {
 	}
 	
 	//로그인 체크
-	public int checkLogin(String memberId, String password) {
+	public boolean checkLogin(Member member) {
 		try {
 			conn = JDBCUtil.getConnention();
-			String sql = "SELECT * FROM t_member WHERE memberid=?";
+			String sql = "SELECT * FROM t_member WHERE memberid=? and passwd=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memberId);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPasswd());
 			rs = pstmt.executeQuery();
 			if(rs.next()) { //아이디 일치
-				String dbPw = rs.getString("passwd");
-				if(dbPw.equals(password)) {
-					return 1;  //비밀번호 일치
-				}else {
-					return -1;  //비밀번호 불일치
-				}
-			}else {
-				return 0;  //아이디 불일치
+				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(conn, pstmt, rs);
 		}
-		return -2;  //db 오류
+		return false; 
 	}
 	
 	/*public Boolean checkLogin(String memberId, String password) {
