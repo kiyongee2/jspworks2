@@ -14,6 +14,14 @@
 			<h1>회원 로그인</h1>
 		</div>
 		<div>
+			<%
+				String error = request.getParameter("error");
+				if(error != null){
+					out.println("<div>");
+					out.println("아이디와 비밀번호를 확인해 주세요");
+					out.println("</div>");
+				}
+			%>
 			<form action="./loginProcess.jsp" method="post">
 			<table class="tbl">
 				<tr>

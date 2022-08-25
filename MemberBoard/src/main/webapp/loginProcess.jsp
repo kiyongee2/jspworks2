@@ -21,9 +21,6 @@
 		out.println("location.href = './main.jsp' ");
 		out.println("</script>");
 	}else{
-		out.println("<script>");
-		out.println("alert('아이디나 비밀번호를 확인해주세요')");
-		out.println("history.go(-1)");
-		out.println("</script>");
+		response.sendRedirect("loginMember.jsp?error=1");
 	}
 %>
