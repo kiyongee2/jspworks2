@@ -90,10 +90,10 @@ public class MainController extends HttpServlet {
 			member.setMemberId(memberId);
 			member.setPasswd(passwd);
 			
-			boolean loginResult = memberDAO.checkLogin(member);
+			int loginResult = memberDAO.checkLogin(member);
 			String name = memberDAO.getNameByLogin(memberId);
 			
-			if(loginResult) {
+			if(loginResult==1) {
 				session.setAttribute("sessionId", memberId);  //id 세션 발급
 				session.setAttribute("name", name);  //name 세션 발급
 				request.setAttribute("msg", "login");

@@ -59,43 +59,45 @@ public class MemberDAO {
 	}
 	
 	//로그인 체크
-	public boolean checkLogin(Member member) {
+	public int checkLogin(Member member) {
 		try {
 			conn = JDBCUtil.getConnention();
-			String sql = "SELECT * FROM t_member WHERE memberid=? and passwd=?";
+			String sql = "SELECT count(*) FROM t_member WHERE memberid=? and passwd=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, member.getPasswd());
 			rs = pstmt.executeQuery();
 			if(rs.next()) { //아이디 일치
-				return true;
+				return 1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(conn, pstmt, rs);
 		}
-		return false; 
+		return 0; 
 	}
 	
-	/*public Boolean checkLogin(String memberId, String password) {
-		conn = JDBCUtil.getConnention();
-		String sql = "SELECT * FROM t_member WHERE memberid=? and passwd=?";
+	//ID 중복 체크
+	public boolean duplicatedID(String memberId) {
+		boolean result = false;
 		try {
+			conn = JDBCUtil.getConnention();
+			String sql = "SELECT DECODE(COUNT(*), 1, 'true', 'false') AS result "
+					+ "FROM t_member WHERE memberid=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
-			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				return true;
-			}
+				result = rs.getBoolean("result");
+			}		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(conn, pstmt, rs);
 		}
-		return false;
-	}*/
+		return result;
+	}
 	
 	//회원 이름 가져오기
 	public String getNameByLogin(String memberId) {
@@ -109,8 +111,9 @@ public class MemberDAO {
 				return rs.getString("name");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
 		}
 		return null;
 	}

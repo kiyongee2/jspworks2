@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class JDBCUtil {
-	private static String driverClass = "com.mysql.cj.jdbc.Driver";
-	private static String url = "jdbc:mysql://localhost:3306/javaweb";
-	private static String username = "jweb";
-	private static String password = "045901";
+	private static String driverClass = "oracle.jdbc.OracleDriver";
+	private static String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	private static String username = "c##jweb";
+	private static String password = "54321";
 	
     //DB 연결 메서드
 	public static Connection getConnention() {

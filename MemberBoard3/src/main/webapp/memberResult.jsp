@@ -14,19 +14,6 @@
 		<div class="title">
 			<h1>회원 정보</h1>
 		</div>
-		<div>
-			<c:choose>
-				<c:when test="${loginResult eq '0'}">
-					<script>alert("아이디가 틀립니다."); history.go(-1);</script>
-				</c:when>
-				<c:when test="${loginResult eq '-1'}">
-					<script>alert("비밀번호가 틀립니다."); history.go(-1);</script>
-				</c:when>
-				<c:when test="${loginResult eq '-2'}">
-					<script>alert("데이터베이스 오류입니다."); history.go(-1);</script>
-				</c:when>
-			</c:choose>
-		</div>
 		<div class="msg">
 			<c:choose>
 				<c:when test="${msg eq 'register'}">

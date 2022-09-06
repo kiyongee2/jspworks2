@@ -111,20 +111,10 @@ public class BoardDAO {
 	public void updateHit(int bnum) {
 		try {
 			conn= JDBCUtil.getConnention();
-			String sql = "SELECT hit FROM t_board WHERE bnum=?";
+			//조회수 update 쿼리
+			String sql = "UPDATE t_board SET hit = hit + 1 WHERE bnum=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bnum);
-			rs = pstmt.executeQuery();
-			int hit = 0;
-			if(rs.next()) {
-				hit = rs.getInt("hit") + 1;
-			}
-			
-			//조회수 update 쿼리
-			sql = "UPDATE t_board SET hit = ? WHERE bnum=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, hit);
-			pstmt.setInt(2, bnum);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
