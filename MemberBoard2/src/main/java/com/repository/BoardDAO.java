@@ -32,8 +32,59 @@ public class BoardDAO {
 		}
 	}
 	
+	//게시글 총 개수
+	public int getBoardCount() {
+		int total = 0;
+		try {
+			conn= JDBCUtil.getConnention();
+			String sql = "SELECT COUNT(*) total FROM t_board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt("total");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return total;
+	}
+	
+	//게시글 목록(페이징)
+	public ArrayList<Board> getListAll(int row, int page){
+		ArrayList<Board> boardList = new ArrayList<>();
+		
+		try {
+			conn = JDBCUtil.getConnention();
+			String sql = "SELECT * FROM("
+						+ " SELECT ROWNUM num, board.*"
+						+ " FROM (SELECT * FROM t_board ORDER BY bnum DESC) board)"
+						+ " WHERE num BETWEEN ? AND ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, row);      //시작행
+			pstmt.setInt(2, page*10);  //현재 페이지 x 10
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Board board = new Board();
+				board.setBnum(rs.getInt("bnum"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setRegDate(rs.getDate("regdate"));
+				board.setMemberId(rs.getString("memberId"));
+				board.setHit(rs.getInt("hit"));
+				boardList.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, pstmt, rs);
+		}
+		return boardList;
+	}
+	
 	//게시글 목록
-	public ArrayList<Board> getListAll(){
+	/*public ArrayList<Board> getListAll(){
 		ArrayList<Board> boardList = new ArrayList<>();
 		
 		try {
@@ -57,7 +108,7 @@ public class BoardDAO {
 			JDBCUtil.close(conn, pstmt, rs);
 		}
 		return boardList;
-	}
+	}*/
 	
 	//게시글 상세 보기
 	public Board getBoard(int bnum) {
@@ -90,20 +141,9 @@ public class BoardDAO {
 	public void updateHit(int bnum) {
 		try {
 			conn= JDBCUtil.getConnention();
-			String sql = "SELECT hit FROM t_board WHERE bnum=?";
+			String sql = "UPDATE t_board SET hit = hit + 1 WHERE bnum = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bnum);
-			rs = pstmt.executeQuery();
-			int hit = 0;
-			if(rs.next()) {
-				hit = rs.getInt("hit") + 1;
-			}
-			
-			//조회수 update 쿼리
-			sql = "UPDATE t_board SET hit = ? WHERE bnum=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, hit);
-			pstmt.setInt(2, bnum);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -135,10 +135,39 @@ public class MainController extends HttpServlet {
 			
 			nextPage="/memberResult.jsp";
 		}else if(command.equals("/boardList.do")) { //게시글 목록 보기
-			ArrayList<Board> boardList = boardDAO.getListAll();
+			String pageNum = request.getParameter("pageNum");
+			if(pageNum == null){
+				pageNum = "1";
+			}
+			int currentPage = Integer.parseInt(pageNum);  //현재 페이지
+			
+			int pageSize = 10;  //페이지당 개시글 수
+			
+			//(1page -> 1번(start)), (2 -> 11), (3 -> 21)
+			int startRow =(currentPage-1)*pageSize + 1;   //첫 행
+			
+			//게시글 총수
+			int total = boardDAO.getBoardCount();
+			
+			//시작 페이지
+			int startPage = startRow / pageSize + 1; 
+			
+			/*마지막 페이지
+				13 -> 2, 23 -> 3, 33 -> 4
+				13/10 -> 1.3 -> ceil(1.3) -> 2.0(올림)
+				23/10 -> 2.3 -> ceil(2.3) -> 3.0(올림)
+			*/
+			//out.println((double)total/10);
+			int endPage = (int)Math.ceil((double)total/pageSize);
+			
+			ArrayList<Board> boardList = boardDAO.getListAll(startRow, currentPage);
 			
 			//model - 회원 목록 데이터
 			request.setAttribute("boardList", boardList);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("total", total);
 			
 			//view
 			nextPage = "/board/boardList.jsp";

@@ -37,7 +37,7 @@ public class BoardDAO {
 		int total = 0;
 		try {
 			conn= JDBCUtil.getConnention();
-			String sql = "SELECT COUNT(*) total From t_board";
+			String sql = "SELECT COUNT(*) total FROM t_board";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
